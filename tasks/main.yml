@@ -1,2 +1,16 @@
 ---
-# tasks file for egjiri.new-hostname
+- name: update hostname
+  become: True
+  hostname:
+    name: "{{new_hostname}}"
+  notify: "{{new_hostname_notifications}}"
+  when: "{{new_hostname != ''}}"
+
+- name: update /etc/hosts with the new hostname
+  become: True
+  lineinfile:
+    dest: /etc/hosts
+    regexp: '^127\.0\.0\.1'
+    line: "127.0.0.1 {{new_hostname}}"
+  notify: "{{new_hostname_notifications}}"
+  when: "{{new_hostname != ''}}"

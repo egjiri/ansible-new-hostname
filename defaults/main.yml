@@ -1,2 +1,6 @@
 ---
-# defaults file for egjiri.new-hostname
+# Set the new desired hostname of the host runinng this role
+new_hostname: ''
+
+# Set a list of handlers to notify if there are changes to the hostname
+new_hostname_notifications: []
